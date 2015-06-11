@@ -1,10 +1,6 @@
 class MainController < ApplicationController
-  def index
-  end
 
   def products
-      @products = Affiliate.fetch
-
-      render 'index'
+    @products = Affiliate.fetch
   end
 end

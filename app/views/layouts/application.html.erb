@@ -19,13 +19,26 @@
         <%= link_to "Sign in", main_app.new_user_session_path %>
       <% end %>
     </header>
-    <h1>Products from affiliate API</h1>
-    <div class="products">
-      <p>Fetching products, wait a moment ...</p>
+<h1>Products from affiliate API</h1>
+<% if @products %>
+  <div class="products">
 
-      <!-- Fetch via Ajax later -->
+    <!-- If API changes products, new products will be added to our DB, so make sure we only display 10 at a time -->
 
-    </div>
+    <% @products.last(10).each do |product| %>
+      <div class="product">
+        <%= link_to product.name, product.url %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="products processing">
+    <p>Fetching products, wait a moment ...</p>
+
+    <!-- Fetch via Ajax later -->
+
+  </div>
+<% end %>
     <%= yield %>
   </body>
 </html>
